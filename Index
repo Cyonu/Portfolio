@@ -1,1 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistic Vision | Digital Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --light: #f1f1f1;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --section-gap: 100px;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background-color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: var(--section-gap) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--highlight);
+            color: var(--light);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background: #d13354;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+        }
+
+        .btn-outline:hover {
+            background: var(--highlight);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 25px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(26, 26, 46, 0.98);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--highlight);
+        }
+
+        .logo span {
+            color: var(--highlight);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 35px;
+            position: relative;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1.05rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--secondary);
+            min-width: 200px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(10px);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), 
+                        url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .scroll-down i {
+            font-size: 2rem;
+            color: var(--light);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .scroll-down:hover i {
+            opacity: 1;
+            color: var(--highlight);
+        }
+
+        /* Genre Navigation */
+        .genre-nav {
+            background: var(--secondary);
+            padding: 15px 0;
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .genre-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .genre-links a {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .genre-links a:hover,
+        .genre-links a.active {
+            background: var(--highlight);
+        }
+
+        /* Gallery Sections */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .gallery-section:nth-child(even) {
+            background: var(--secondary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .art-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            aspect-ratio: 16/9;
+        }
+
+        .art-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .art-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .art-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .art-thumbnail video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .art-item:hover .art-thumbnail img {
+            opacity: 0;
+        }
+
+        .art-item:hover .art-thumbnail video {
+            opacity: 1;
+        }
+
+        .art-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .art-item:hover .art-info {
+            transform: translateY(0);
+        }
+
+        .art-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .art-info p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .art-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .art-tag {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--primary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h2 {
+            margin-bottom: 25px;
+            font-size: 2.3rem;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .skills {
+            margin-top: 40px;
+        }
+
+        .skills h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            padding: 8px 18px;
+            background: var(--accent);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-tag i {
+            margin-right: 8px;
+            color: var(--highlight);
+        }
+
+        /* Certifications Section */
+        .certifications {
+            background: var(--secondary);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .cert-card {
+            background: var(--primary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .cert-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .cert-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .cert-card:hover .cert-img img {
+            transform: scale(1.05);
+        }
+
+        .cert-info {
+            padding: 25px;
+        }
+
+        .cert-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .cert-info .issuer {
+            display: block;
+            margin-bottom: 15px;
+            color: var(--highlight);
+            font-weight: 500;
+        }
+
+        .cert-info .date {
+            display: block;
+            margin-bottom: 15px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .cert-info .btn {
+            margin-top: 15px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--primary);
+            padding: 80px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--secondary);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--secondary);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            padding: 30px;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--highlight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 1.2rem;
+        }
+
+        .contact-text h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .contact-text p, .contact-text a {
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .contact-text a:hover {
+            color: var(--highlight);
+        }
+
+        .contact-form {
+            background: var(--primary);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            color: var(--light);
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--highlight);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--highlight);
+        }
+
+        .footer-col p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--highlight);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--highlight);
+            color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #d13354;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                background: transparent;
+                box-shadow: none;
+                display: none;
+                margin-top: 10px;
+            }
+
+            .dropdown:hover .dropdown-content {
+                transform: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 8px 0;
+                border-bottom: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .genre-nav {
+                top: 70px;
+            }
+
+            .genre-links {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                scrollbar-width: none;
+            }
+
+            .genre-links::-webkit-scrollbar {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-palette logo-icon"></i>
+                    Artistic<span>Vision</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Portfolio <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="2d-art.html">2D Art</a></li>
+                            <li><a href="3d-art.html">3D Art</a></li>
+                            <li><a href="game-art.html">Game Art</a></li>
+                            <li><a href="concept-art.html">Concept Art</a></li>
+                            <li><a href="illustrations.html">Illustrations</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Where Creativity Meets Innovation</h1>
+                <p>I'm a multidisciplinary artist specializing in digital and traditional mediums. My portfolio showcases a diverse range of work across multiple genres and platforms.</p>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn">Explore My Work</a>
+                    <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Genre Navigation -->
+    <div class="genre-nav" id="portfolio">
+        <div class="container">
+            <ul class="genre-links">
+                <li><a href="#2d-art" class="active">2D Art</a></li>
+                <li><a href="#3d-art">3D Art</a></li>
+                <li><a href="#game-art">Game Art</a></li>
+                <li><a href="#concept-art">Concept Art</a></li>
+                <li><a href="#illustrations">Illustrations</a></li>
+                <li><a href="#motion-graphics">Motion Graphics</a></li>
+                <li><a href="#ui-ux">UI/UX Design</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2D Art Section -->
+    <section class="gallery-section" id="2d-art">
+        <div class="container">
+            <h2 class="section-title">2D Digital Art</h2>
+            <p class="text-center mb-30">Digital paintings and illustrations created with Photoshop, Procreate, and other 2D tools</p>
+            <div class="gallery-grid">
+                <!-- Art Item 1 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Abstract Color Explosion">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-background-with-moving-lines-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Color Explosion</h3>
+                        <p>Digital abstract composition exploring vibrant color relationships</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Photoshop</span>
+                            <span class="art-tag">Digital Painting</span>
+                            <span class="art-tag">Abstract</span>
+                        </div>
+                        <a href="project1.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 2 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Surreal Landscape">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-snowy-mountain-peak-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Dreamscape</h3>
+                        <p>Surreal environment blending natural and architectural elements</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Procreate</span>
+                            <span class="art-tag">Surrealism</span>
+                            <span class="art-tag">Landscape</span>
+                        </div>
+                        <a href="project2.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 3 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=745&q=80" alt="Portrait Series">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-portrait-in-a-pool-of-water-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Metamorphosis</h3>
+                        <p>Portrait series exploring identity transformation</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Portrait</span>
+                            <span class="art-tag">Character Design</span>
+                            <span class="art-tag">Krita</span>
+                        </div>
+                        <a href="project3.html" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Art Section -->
+    <section class="gallery-section" id="3d-art">
+        <div class="container">
+            <h2 class="section-title">3D Art & Modeling</h2>
+            <p class="text-center mb-30">3D models, environments, and renders created with Blender, Maya, and ZBrush</p>
+            <div class="gallery-grid">
+                <!-- Art Item 1 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="3D Character Model">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-character-model-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Cyber Samurai</h3>
+                        <p>High-poly character model with detailed textures</p>
+                        <div class="art-tags">
+                            <span class="art-tag">ZBrush</span>
+                            <span class="art-tag">Character</span>
+                            <span class="art-tag">Substance</span>
+                        </div>
+                        <a href="project4.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 2 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1639762681297-2fe110cad851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Architectural Visualization">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-architectural-visualization-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Futuristic Cityscape</h3>
+                        <p>Architectural visualization of a cyberpunk metropolis</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Blender</span>
+                            <span class="art-tag">Environment</span>
+                            <span class="art-tag">Archviz</span>
+                        </div>
+                        <a href="project5.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 3 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="3D Sculpture">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-sculpture-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Organic Sculpture</h3>
+                        <p>Digital sculpture exploring organic forms</p>
+                        <div class="art-tags">
+                            <span class="art-tag">ZBrush</span>
+                            <span class="art-tag">Sculpture</span>
+                            <span class="art-tag">Organic</span>
+                        </div>
+                        <a href="project6.html" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Art Section -->
+    <section class="gallery-section" id="game-art">
+        <div class="container">
+            <h2 class="section-title">Game Art</h2>
+            <p class="text-center mb-30">Assets, characters, and environments created for video games</p>
+            <div class="gallery-grid">
+                <!-- Art Item 1 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Character">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-game-character-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Rogue Adventurer</h3>
+                        <p>Low-poly game character with animations</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Unity</span>
+                            <span class="art-tag">Character</span>
+                            <span class="art-tag">Rigging</span>
+                        </div>
+                        <a href="project7.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 2 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Environment">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-game-environment-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Fantasy Village</h3>
+                        <p>Modular game environment for RPG</p>
+                        <div class="art-tags">
+                            <span class="art-tag">Unreal</span>
+                            <span class="art-tag">Environment</span>
+                            <span class="art-tag">Modular</span>
+                        </div>
+                        <a href="project8.html" class="btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Art Item 3 -->
+                <div class="art-item">
+                    <div class="art-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="UI Elements">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-game-ui-elements-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="art-info">
+                        <h3>Game UI Kit</h3>
+                        <p>Custom UI elements for mobile game</p>
+                        <div class="art-tags">
+                            <span class="art-tag">UI Design</span>
+                            <span class="art-tag">Mobile</span>
+                            <span class="art-tag">Vector</span>
+                        </div>
+                        <a href="project9.html" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Software Mastered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Industry Awards</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <p class="text-center mb-30">Professional certifications and completed courses in various digital art disciplines</p>
+            <div class="cert-grid">
+                <!-- Cert 1 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="3D Modeling Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Advanced 3D Modeling</h3>
+                        <span class="issuer">CG Master Academy</span>
+                        <span class="date">Completed: June 2022</span>
+                        <p>Mastered advanced modeling techniques in Maya and ZBrush for character and environment creation.</p>
+                        <a href="#" class="btn btn-outline">View Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Digital Painting Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Digital Painting Masterclass</h3>
+                        <span class="issuer">Schoolism</span>
+                        <span class="date">Completed: March 2021</span>
+                        <p>Comprehensive training in digital painting techniques for concept art and illustration.</p>
+                        <a href="#" class="btn btn-outline">View Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Design Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Game Art & Design</h3>
+                        <span class="issuer">Gnomon School</span>
+                        <span class="date">Completed: November 2020</span>
+                        <p>Specialized training in creating assets for real-time game engines like Unreal and Unity.</p>
+                        <a href="#" class="btn btn-outline">View Certificate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 50px;">
+                <a href="certifications.html" class="btn">View All Certifications</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Let's Work Together</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <a href="mailto:contact@artisticvision.com">contact@artisticvision.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Phone</h3>
+                                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Location</h3>
+                                <p>San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-artstation"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>About Me</h3>
+                    <p>Multidisciplinary digital artist with a passion for creating visually stunning and conceptually rich artwork across various mediums.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-artstation"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="2d-art.html">2D Art</a></li>
+                        <li><a href="3d-art.html">3D Art</a></li>
+                        <li><a href="game-art.html">Game Art</a></li>
+                        <li><a href="certifications.html">Certifications</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to my newsletter for updates on new work, tutorials, and exhibitions.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" class="form-control" style="margin-bottom: 15px;">
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <p class="copyright">© 2023 Artistic Vision. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+
+            // Mobile dropdown toggle
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (!link.parentElement.classList.contains('dropdown')) {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                }
+            });
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Update active state in genre nav
+                            if (href.startsWith('#') && href.length > 1) {
+                                document.querySelectorAll('.genre-links a').forEach(link => {
+                                    link.classList.remove('active');
+                                });
+                                this.classList.add('active');
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Play videos on hover
+            const artItems = document.querySelectorAll('.art-item');
+            artItems.forEach(item => {
+                const video = item.querySelector('video');
+                
+                item.addEventListener('mouseenter', () => {
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play().catch(e => console.log(e));
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (video) {
+                        video.pause();
+                    }
+                });
+            });
+
+            // Scroll down button
+            const scrollDown = document.querySelector('.scroll-down');
+            if (scrollDown) {
+                scrollDown.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: document.getElementById('portfolio').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Here you would typically send the data to a server
+                    console.log('Form submitted:', { name, email, subject, message });
+                    
+                    // Show success message
+                    alert('Thank you for your message! I will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-title, .art-item, .stat-card, .cert-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
