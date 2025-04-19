@@ -8,7 +8,1316 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #444;
+            --highlight: #FF4D4D;
+            --highlight-light: #FF6B6B;
+            --text: #EAEAEA;
+            --text-light: #FFFFFF;
+            --text-dark: #B0B0B0;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --section-gap: 120px;
+            --container-width: 1400px;
+            --max-content-width: 900px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--black);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 92%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .content-container {
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: var(--section-gap) 0;
+            position: relative;
+        }
+
+        .section-title {
+            margin-bottom: 80px;
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 2px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background: var(--highlight);
+            color: var(--text-light);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background: var(--highlight-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+            color: var(--highlight);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .mb-20 { margin-bottom: 20px; }
+        .mb-30 { margin-bottom: 30px; }
+        .mb-40 { margin-bottom: 40px; }
+        .mb-50 { margin-bottom: 50px; }
+        .mb-60 { margin-bottom: 60px; }
+        .mb-80 { margin-bottom: 80px; }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .flex {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: var(--transition);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        header.scrolled {
+            padding: 16px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--highlight);
+            font-size: 1.4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.6rem;
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
+                        url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 24px;
+            animation: fadeInDown 0.8s ease;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeIn 1s ease;
+            flex-wrap: wrap;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .scroll-down i {
+            font-size: 2rem;
+            color: var(--text-light);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .scroll-down:hover i {
+            opacity: 1;
+            color: var(--highlight);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--dark-gray);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-img:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-content h2 {
+            margin-bottom: 30px;
+        }
+
+        .about-skills {
+            margin-top: 40px;
+        }
+
+        .about-skills h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: var(--medium-gray);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        /* Work Experience Section */
+        .work-experience {
+            background: var(--black);
+        }
+
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--highlight);
+        }
+
+        .experience-card {
+            background: var(--dark-gray);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--highlight);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--highlight);
+            border: 4px solid var(--black);
+        }
+
+        .experience-card.left::before {
+            right: -50px;
+        }
+
+        .experience-card.right::before {
+            left: -50px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            display: block;
+            color: var(--highlight);
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .job-date {
+            background: var(--light-gray);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+
+        .job-description {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Portfolio Sections */
+        .portfolio {
+            background: var(--dark-gray);
+        }
+
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background: var(--medium-gray);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            color: var(--text);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            aspect-ratio: 16/9;
+            background: var(--medium-gray);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-thumbnail video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-thumbnail img {
+            opacity: 0;
+        }
+
+        .portfolio-item:hover .portfolio-thumbnail video {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .portfolio-info p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-tag {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--black);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            background: var(--dark-gray);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--highlight);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 25px;
+        }
+
+        .process-step h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--dark-gray);
+            padding: 100px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--medium-gray);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            border-bottom: 4px solid var(--highlight);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Certifications Section */
+        .certifications {
+            background: var(--black);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .cert-card {
+            background: var(--dark-gray);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .cert-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .cert-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .cert-card:hover .cert-img img {
+            transform: scale(1.05);
+        }
+
+        .cert-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .cert-info .issuer {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--highlight);
+            font-weight: 500;
+        }
+
+        .cert-info .date {
+            display: block;
+            margin-bottom: 15px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .cert-info p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--dark-gray);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--medium-gray);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-content {
+            margin-bottom: 25px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            font-size: 4rem;
+            color: var(--highlight);
+            opacity: 0.2;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Blog Section */
+        .blog {
+            background: var(--black);
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--dark-gray);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-date {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--highlight);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-gray);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            padding: 20px;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--highlight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 1.2rem;
+        }
+
+        .contact-text h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-text p, .contact-text a {
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .contact-text a:hover {
+            color: var(--highlight);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--medium-gray);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--black);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--medium-gray);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            color: var(--text);
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--highlight);
+            background: var(--dark-gray);
+        }
+
+        textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 100px 0 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--highlight);
+        }
+
+        .footer-col p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--highlight);
+            transform: translateX(5px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 12px 16px;
+            background: var(--medium-gray);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--highlight);
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            opacity: 0.6;
+            padding-top: 40px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--highlight);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--highlight-light);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-container {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 60px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .experience-timeline::before {
+                left: 30px;
+            }
+            
+            .experience-card::before {
+                left: 20px !important;
+            }
+            
+            .experience-card.left, .experience-card.right {
+                margin-left: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--black);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 0 40px;
+                transition: var(--transition);
+                gap: 25px;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 50px;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .job-date {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -60,7 +1369,7 @@
         <div class="container">
             <div class="about-container">
                 <div class="about-img">
-                    <img src="images/profile.jpg" alt="Alex Creative">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Alex Creative">
                 </div>
                 <div class="about-content">
                     <h2 class="section-title">About Me</h2>
@@ -152,6 +1461,55 @@
                         <span class="skill-tag">Project Management</span>
                     </div>
                 </div>
+                
+                <!-- Job 4 -->
+                <div class="experience-card right">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Junior Graphic Designer</h3>
+                            <span class="company">Creative Minds Agency</span>
+                        </div>
+                        <span class="job-date">2014 - 2016</span>
+                    </div>
+                    <p class="job-description">Created branding materials, marketing collateral, and web graphics for diverse clients. Assisted senior designers and developed foundational design skills. Contributed to award-winning campaigns for major brands.</p>
+                    <div class="job-skills">
+                        <span class="skill-tag">Adobe Suite</span>
+                        <span class="skill-tag">Branding</span>
+                        <span class="skill-tag">Print Design</span>
+                        <span class="skill-tag">Web Graphics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process">
+        <div class="container">
+            <h2 class="section-title text-center">My Creative Process</h2>
+            <p class="text-center mb-60">A structured approach to delivering exceptional results</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>Understanding your vision, goals, and requirements through detailed discussions and research.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Conceptualization</h3>
+                    <p>Developing initial sketches, mood boards, and style frames to establish visual direction.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Execution</h3>
+                    <p>Creating high-quality assets with attention to detail and technical precision.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Refinement</h3>
+                    <p>Iterating based on feedback to perfect the final deliverables.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -167,6 +1525,14 @@
                 <div class="stat-card">
                     <div class="stat-number">8</div>
                     <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Software Mastered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Industry Awards</div>
                 </div>
             </div>
         </div>
@@ -190,7 +1556,10 @@
                 <!-- Project 1 -->
                 <div class="portfolio-item" data-category="2d">
                     <div class="portfolio-thumbnail">
-                        <img src="images/project1.jpg" alt="Abstract Color Explosion">
+                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Abstract Color Explosion">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-background-with-moving-lines-1581-large.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <div class="portfolio-info">
                         <h3>Color Explosion</h3>
@@ -207,7 +1576,10 @@
                 <!-- Project 2 -->
                 <div class="portfolio-item" data-category="3d">
                     <div class="portfolio-thumbnail">
-                        <img src="images/project2.jpg" alt="3D Character Model">
+                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="3D Character Model">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-character-model-1581-large.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <div class="portfolio-info">
                         <h3>Cyber Samurai</h3>
@@ -225,7 +1597,10 @@
                 <!-- Project 3 -->
                 <div class="portfolio-item" data-category="game">
                     <div class="portfolio-thumbnail">
-                        <img src="images/project3.jpg" alt="Game Character">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Character">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-game-character-1581-large.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <div class="portfolio-info">
                         <h3>Rogue Adventurer</h3>
@@ -239,11 +1614,245 @@
                         <a href="project3.html" class="btn btn-outline">View Project</a>
                     </div>
                 </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item" data-category="concept">
+                    <div class="portfolio-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Surreal Landscape">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-snowy-mountain-peak-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Dreamscape</h3>
+                        <p>Surreal environment concept blending natural and architectural elements for fantasy game.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Procreate</span>
+                            <span class="portfolio-tag">Surrealism</span>
+                            <span class="portfolio-tag">Landscape</span>
+                            <span class="portfolio-tag">Concept Art</span>
+                        </div>
+                        <a href="project4.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-item" data-category="3d">
+                    <div class="portfolio-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1639762681297-2fe110cad851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Architectural Visualization">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-architectural-visualization-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Futuristic Cityscape</h3>
+                        <p>Architectural visualization of a cyberpunk metropolis with dynamic lighting and materials.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Blender</span>
+                            <span class="portfolio-tag">Environment</span>
+                            <span class="portfolio-tag">Archviz</span>
+                            <span class="portfolio-tag">Lighting</span>
+                        </div>
+                        <a href="project5.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-item" data-category="2d">
+                    <div class="portfolio-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=745&q=80" alt="Portrait Series">
+                        <video loop muted playsinline>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-portrait-in-a-pool-of-water-1581-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Metamorphosis</h3>
+                        <p>Portrait series exploring identity transformation through symbolic elements and lighting.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Portrait</span>
+                            <span class="portfolio-tag">Character Design</span>
+                            <span class="portfolio-tag">Krita</span>
+                            <span class="portfolio-tag">Digital Painting</span>
+                        </div>
+                        <a href="project6.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
             </div>
             
             <div class="text-center" style="margin-top: 60px;">
                 <a href="portfolio.html" class="btn">
                     <i class="fas fa-images"></i> View Full Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section certifications" id="certifications">
+        <div class="container">
+            <h2 class="section-title text-center">Certifications</h2>
+            <p class="text-center mb-60">Professional certifications and completed courses in various digital art disciplines</p>
+            
+            <div class="cert-grid">
+                <!-- Cert 1 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="3D Modeling Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Advanced 3D Modeling</h3>
+                        <span class="issuer">CG Master Academy</span>
+                        <span class="date">Completed: June 2022</span>
+                        <p>Mastered advanced modeling techniques in Maya and ZBrush for character and environment creation, including topology optimization and hard-surface modeling workflows.</p>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Digital Painting Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Digital Painting Masterclass</h3>
+                        <span class="issuer">Schoolism</span>
+                        <span class="date">Completed: March 2021</span>
+                        <p>Comprehensive training in digital painting techniques for concept art and illustration, including color theory, lighting, and composition from industry veterans.</p>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="cert-card">
+                    <div class="cert-img">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Design Certification">
+                    </div>
+                    <div class="cert-info">
+                        <h3>Game Art & Design</h3>
+                        <span class="issuer">Gnomon School</span>
+                        <span class="date">Completed: November 2020</span>
+                        <p>Specialized training in creating assets for real-time game engines like Unreal and Unity, including optimization techniques and pipeline integration.</p>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-certificate"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title text-center">Client Testimonials</h2>
+            <p class="text-center mb-60">What clients and colleagues say about working with me</p>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Alex transformed our game's visual identity with stunning concept art that perfectly captured our vision. Their attention to detail and creative problem-solving made them an invaluable part of our team throughout the entire development process.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Creative Director, PixelForge</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Working with Alex on our book cover was an absolute pleasure. They took our vague ideas and turned them into a breathtaking visual that perfectly represented our story. The communication throughout was excellent, with multiple iterations that showed real understanding of our needs.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Author, Midnight Press</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Alex's 3D models brought our architectural project to life in ways we couldn't have imagined. Their ability to balance artistic vision with technical precision is truly remarkable. The final renders exceeded our expectations and helped secure project funding.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>David Rodriguez</h4>
+                            <p>Lead Architect, Urban Design Co.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section blog">
+        <div class="container">
+            <h2 class="section-title text-center">Latest Articles</h2>
+            <p class="text-center mb-60">Insights, tutorials, and thoughts on digital art and design</p>
+            
+            <div class="blog-posts">
+                <!-- Post 1 -->
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1588&q=80" alt="3D Modeling Techniques">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">June 15, 2023</span>
+                        <h3>Advanced 3D Modeling Techniques</h3>
+                        <p>Exploring professional workflows for creating high-quality 3D assets with optimized topology and detail.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Read Article</a>
+                    </div>
+                </div>
+                
+                <!-- Post 2 -->
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Color Theory">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">May 28, 2023</span>
+                        <h3>Mastering Color in Digital Art</h3>
+                        <p>Practical guide to using color theory to create mood and depth in your digital paintings.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Read Article</a>
+                    </div>
+                </div>
+                
+                <!-- Post 3 -->
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Freelance Tips">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">April 10, 2023</span>
+                        <h3>Freelancing as a Digital Artist</h3>
+                        <p>Essential tips for building a successful freelance career in the competitive digital art space.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Read Article</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 60px;">
+                <a href="blog.html" class="btn">
+                    <i class="fas fa-book-open"></i> View All Articles
                 </a>
             </div>
         </div>
@@ -291,6 +1900,8 @@
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
                         <a href="#" aria-label="ArtStation"><i class="fab fa-artstation"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
@@ -340,8 +1951,19 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#work">Experience</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to my newsletter for updates on new projects, exhibitions, and creative insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" class="newsletter-input" required>
+                        <button type="submit" class="btn">
+                            <i class="fas fa-envelope"></i> Subscribe
+                        </button>
+                    </form>
                 </div>
             </div>
             <p class="copyright">© 2023 Alex Creative. All rights reserved.</p>
@@ -353,6 +1975,174 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Play videos on hover
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach(item => {
+                const video = item.querySelector('video');
+                
+                item.addEventListener('mouseenter', () => {
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play().catch(e => console.log(e));
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (video) {
+                        video.pause();
+                    }
+                });
+            });
+
+            // Portfolio filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItemsAll = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter items
+                    portfolioItemsAll.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Scroll down button
+            const scrollDown = document.querySelector('.scroll-down');
+            if (scrollDown) {
+                scrollDown.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: document.getElementById('about').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Here you would typically send the data to a server
+                    console.log('Form submitted:', { name, email, subject, message });
+                    
+                    // Show success message
+                    alert('Thank you for your message! I will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input').value;
+                    console.log('Newsletter subscription:', email);
+                    alert('Thanks for subscribing to my newsletter!');
+                    this.reset();
+                });
+            }
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-title, .portfolio-item, .experience-card, .stat-card, .cert-card, .testimonial-card, .blog-card, .process-step').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
