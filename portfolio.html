@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Portfolio | Alex Creative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #444;
+            --highlight: #FF4D4D;
+            --highlight-light: #FF6B6B;
+            --text: #EAEAEA;
+            --text-light: #FFFFFF;
+            --text-dark: #B0B0B0;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --section-gap: 120px;
+            --container-width: 1400px;
+            --max-content-width: 900px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--black);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 92%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .content-container {
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: var(--section-gap) 0;
+            position: relative;
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 2px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background: var(--highlight);
+            color: var(--text-light);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background: var(--highlight-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+            color: var(--highlight);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .mb-20 { margin-bottom: 20px; }
+        .mb-30 { margin-bottom: 30px; }
+        .mb-40 { margin-bottom: 40px; }
+        .mb-50 { margin-bottom: 50px; }
+        .mb-60 { margin-bottom: 60px; }
+        .mb-80 { margin-bottom: 80px; }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .flex {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: var(--transition);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        header.scrolled {
+            padding: 16px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--highlight);
+            font-size: 1.4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.6rem;
+            z-index: 1001;
+        }
+
+        /* Portfolio Filter */
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background: var(--medium-gray);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            color: var(--text);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        /* Portfolio Types */
+        .portfolio-type-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+
+        .type-btn {
+            padding: 12px 24px;
+            background: var(--medium-gray);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            color: var(--text);
+        }
+
+        .type-btn:hover, .type-btn.active {
+            background: var(--highlight);
+            color: var(--text-light);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Project Cards */
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            aspect-ratio: 16/9;
+            background: var(--medium-gray);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-thumbnail video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-thumbnail img {
+            opacity: 0;
+        }
+
+        .portfolio-item:hover .portfolio-thumbnail video {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .portfolio-info p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-tag {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            background: var(--medium-gray);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .image-gallery:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-header {
+            padding: 20px;
+            background: var(--dark-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .gallery-header h3 {
+            margin-bottom: 8px;
+        }
+
+        .gallery-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Video Collection */
+        .video-collection {
+            background: var(--medium-gray);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .video-collection:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .video-header {
+            padding: 20px;
+            background: var(--dark-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .video-header h3 {
+            margin-bottom: 8px;
+        }
+
+        .video-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            padding: 2px;
+            background: var(--dark-gray);
+        }
+
+        .video-thumb {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-thumb::after {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .video-thumb:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Grouped Items */
+        .grouped-items {
+            background: var(--medium-gray);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .grouped-items:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .group-header {
+            padding: 20px;
+            background: var(--dark-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .group-header h3 {
+            margin-bottom: 8px;
+        }
+
+        .group-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .group-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            padding: 2px;
+            background: var(--dark-gray);
+        }
+
+        .group-item {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .group-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .group-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--highlight);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--highlight-light);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 50px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .group-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--black);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 0 40px;
+                transition: var(--transition);
+                gap: 25px;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .video-thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .group-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-palette logo-icon"></i>
+                    Alex Creative
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#work">Experience</a></li>
+                    <li><a href="index.html#portfolio">Featured</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Portfolio Header -->
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title text-center">Full Portfolio</h1>
+                <p class="text-center mb-60">Explore my complete collection of digital artworks and design projects</p>
+                
+                <!-- Portfolio Filter -->
+                <div class="portfolio-filter">
+                    <button class="filter-btn active" data-filter="all">All Works</button>
+                    <button class="filter-btn" data-filter="2d">2D Art</button>
+                    <button class="filter-btn" data-filter="3d">3D Art</button>
+                    <button class="filter-btn" data-filter="game">Game Art</button>
+                    <button class="filter-btn" data-filter="concept">Concept Art</button>
+                    <button class="filter-btn" data-filter="illustration">Illustration</button>
+                    <button class="filter-btn" data-filter="environment">Environment</button>
+                    <button class="filter-btn" data-filter="character">Characters</button>
+                </div>
+                
+                <!-- Portfolio Type Selector -->
+                <div class="portfolio-type-selector">
+                    <button class="type-btn active" data-type="all">All Types</button>
+                    <button class="type-btn" data-type="projects">Projects</button>
+                    <button class="type-btn" data-type="galleries">Image Galleries</button>
+                    <button class="type-btn" data-type="videos">Video Collections</button>
+                    <button class="type-btn" data-type="groups">Grouped Works</button>
+                </div>
+                
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid">
+                    <!-- Project 1 -->
+                    <div class="portfolio-item" data-category="2d illustration" data-type="projects">
+                        <div class="portfolio-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Abstract Color Explosion">
+                            <video loop muted playsinline>
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-background-with-moving-lines-1581-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Color Explosion</h3>
+                            <p>Digital abstract composition exploring vibrant color relationships and dynamic forms.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Photoshop</span>
+                                <span class="portfolio-tag">Digital Painting</span>
+                                <span class="portfolio-tag">Abstract</span>
+                            </div>
+                            <a href="project1.html" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Image Gallery 1 -->
+                    <div class="image-gallery" data-category="3d environment" data-type="galleries">
+                        <div class="gallery-header">
+                            <h3>Modular Environment Assets</h3>
+                            <p>A collection of reusable 3D environment pieces for game development</p>
+                        </div>
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Environment Asset 1">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Environment Asset 2">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Environment Asset 3">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Environment Asset 4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Collection 1 -->
+                    <div class="video-collection" data-category="game character" data-type="videos">
+                        <div class="video-header">
+                            <h3>Character Animation Reel</h3>
+                            <p>Showcase of character animations for various game projects</p>
+                        </div>
+                        <div class="video-player">
+                            <video controls poster="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-character-model-1581-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-thumbnails">
+                            <div class="video-thumb" data-video="https://assets.mixkit.co/videos/preview/mixkit-3d-character-model-1581-large.mp4">
+                                <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Animation 1">
+                            </div>
+                            <div class="video-thumb" data-video="https://assets.mixkit.co/videos/preview/mixkit-game-character-1581-large.mp4">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Animation 2">
+                            </div>
+                            <div class="video-thumb" data-video="https://assets.mixkit.co/videos/preview/mixkit-sci-fi-character-1581-large.mp4">
+                                <img src="https://images.unsplash.com/photo-1639762681297-2fe110cad851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Animation 3">
+                            </div>
+                            <div class="video-thumb" data-video="https://assets.mixkit.co/videos/preview/mixkit-character-walk-cycle-1581-large.mp4">
+                                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=745&q=80" alt="Animation 4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grouped Items 1 (Houses) -->
+                    <div class="grouped-items" data-category="3d environment" data-type="groups">
+                        <div class="group-header">
+                            <h3>Fantasy Architecture Series</h3>
+                            <p>A collection of 5 unique fantasy house designs with detailed interiors</p>
+                        </div>
+                        <div class="group-grid">
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House 1">
+                            </div>
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House 2">
+                            </div>
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House 3">
+                            </div>
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House 4">
+                            </div>
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House 5">
+                            </div>
+                            <div class="group-item">
+                                <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fantasy House Details">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="portfolio-item" data-category="3d character" data-type="projects">
+                        <div class="portfolio-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="3D Character Model">
+                            <video loop muted playsinline>
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-character-model-1581-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Cyber Samurai</h3>
+                            <p>High-poly character model with detailed textures and material work for next-gen game assets.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">ZBrush</span>
+                                <span class="portfolio-tag">Character</span>
+                                <span class="portfolio-tag">Substance</span>
+                                <span class="portfolio-tag">Maya</span>
+                            </div>
+                            <a href="project2.html" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Image Gallery 2 -->
+                    <div class="image-gallery" data-category="2d illustration" data-type="galleries">
+                        <div class="gallery-header">
+                            <h3>Character Concept Sketches</h3>
+                            <p>Exploration sketches for various character designs</p>
+                        </div>
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=745&q=80" alt="Character Sketch 1">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1639762681297-2fe110cad851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Character Sketch 2">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Character Sketch 3">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Character Sketch 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Alex Creative</h3>
+                    <p>Creating visually stunning digital art and designs that tell compelling stories and engage audiences across multiple mediums.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                        <a href="#" aria-label="ArtStation"><i class="fab fa-artstation"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#work">Experience</a></li>
+                        <li><a href="index.html#portfolio">Featured</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="copyright">© 2023 Alex Creative. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Portfolio filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const typeButtons = document.querySelectorAll('.type-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item, .image-gallery, .video-collection, .grouped-items');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    filterPortfolio(filterValue);
+                });
+            });
+
+            typeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    typeButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const typeValue = button.getAttribute('data-type');
+                    filterByType(typeValue);
+                });
+            });
+
+            function filterPortfolio(filterValue) {
+                const activeType = document.querySelector('.type-btn.active').getAttribute('data-type');
+                
+                portfolioItems.forEach(item => {
+                    const categories = item.getAttribute('data-category').split(' ');
+                    
+                    // Check both category and type filters
+                    const categoryMatch = filterValue === 'all' || categories.includes(filterValue);
+                    const typeMatch = activeType === 'all' || item.getAttribute('data-type') === activeType;
+                    
+                    if (categoryMatch && typeMatch) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            function filterByType(typeValue) {
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    const categories = item.getAttribute('data-category').split(' ');
+                    
+                    // Check both category and type filters
+                    const typeMatch = typeValue === 'all' || item.getAttribute('data-type') === typeValue;
+                    const categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
+                    
+                    if (typeMatch && categoryMatch) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            // Video thumbnails functionality
+            const videoThumbs = document.querySelectorAll('.video-thumb');
+            if (videoThumbs.length > 0) {
+                const videoPlayer = document.querySelector('.video-player video');
+                
+                videoThumbs.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        const videoSrc = thumb.getAttribute('data-video');
+                        videoPlayer.src = videoSrc;
+                        videoPlayer.load();
+                        videoPlayer.play();
+                    });
+                });
+            }
+
+            // Play videos on hover
+            const portfolioVideos = document.querySelectorAll('.portfolio-item');
+            portfolioVideos.forEach(item => {
+                const video = item.querySelector('video');
+                
+                item.addEventListener('mouseenter', () => {
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play().catch(e => console.log(e));
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (video) {
+                        video.pause();
+                    }
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
